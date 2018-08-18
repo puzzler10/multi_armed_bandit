@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<div class="settings">
+    <div class="row">
+        <div class="slider col1" id="n_slot_machine_slider_div">
+            <label class="label" for="n_slot_machines">Number of slot machines (n): </label>
+            <em id="n_slot_machine_display" class="label" style="font-style: normal;">10</em>
+            <br>
+            <input type="range" name="n_slot_machines" id="n_slot_machines" min="1" max="200" value="10" 
+                oninput="set_n_slot_machines()" />
+        </div>
+		<div class="slider col2" id="epsilon_slider_div">
+            <label class="label" for="epsilon">Chance to choose randomly (ε): </label>
+            <em id="epsilon_display"  class="label" style="font-style: normal;">0.1</em>
+            <br>
+            <input type="range" name="epsilon" id="epsilon" min="0" max="1" value="0.1" 
+                step="0.01" oninput="set_epsilon()" />
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="slider col1" id="t_div">
+            <label class="label">Number of action selections (t): </label>
+            <em id = 't_display' class="label" style='font-style: normal;'> 2000 </em>
+            <br>
+            <input type="range" name="t" id="t" min="200" max="5000" value="2000" step="100"
+                oninput="set_t()" />
+            <br> 
+        </div>
+        <div class="slider col2" id="speed_slider_div">
+            <label class="label">Time between action selections: </label>
+            <em id = 'speed_display'  class="label" style='font-style: normal;'> 5 </em>
+            <br>
+            <input type="range" name="speed" id="speed" min="0" max="1000" value="5" step="5"
+                oninput="set_time_between_ticks()" />
+            <br> 
+        </div>
+    </div>
+    <div class="row">
+        <div class ="ghosts_radio_div col1">
+            <label class="label"> Show true means? </label>
+            <label class="label" >
+                <input name="ghosts" type="radio" id="ghosts_yes" value="Yes" onclick="show_ghosts()">
+                Yes
+            </label>
+            <label class="label"> 
+                <input name="ghosts" type="radio" id="ghosts_no" value="No" onclick="hide_ghosts()" checked="checked">
+                No 
+            </label>
+        </div> 
+        <div class="score_div col2">
+            <em class="score label" style='font-style: normal; font-weight: bold;'> Average Score: <span id="score_display">0</span> </em> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="button_div col1">
+            <button id="startButton" class="button" onclick="start()"> Start </button> 
+        </div>
+        <div class="button_div col2">
+            <button id="resetButton" class="button" onclick="reset()"> Reset </button>
+        </div>
+     </div>
+</div>    
+<div class="simulation">
+    <svg class="svg_box" width="940" height="700"></svg>
+</div>
+
+<link rel="stylesheet" type="text/css" href="styling.css">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="svg_functions.js"></script>
+<script src="html_functions.js"></script>
+<script src="slot_machine_functions.js"></script>
+<script src="statistical_functions.js"></script>
+
+<script>
+
+//variables for the svg block and the borders 
+var svg,
+	border,
+	width,
+	height;
+
+//variables for the axis and scales 
+var xScale, yScale;
+var xAxis, yAxis;
+
+//variables that are set by the sliders 
+//n-armed bandit - how many slot machines there are 
+var n = 10;
+var n_temp; // a temp variable that allows the slider display to update 
+
+//t time steps 
+var t = 2000;
+var t_temp; // a temp variable that allows the slider display to update 
+
+//epsilon - the chance to choose randomly
+var epsilon = 0.1;
+
+//interval between loops - set by slider with id "speed"
+var interval = 5; 
+
+//set by radio button for true means 
+var ghostFlag = false; 
+
+//score - the total score at any point from the slot machines
+//avg_score - score divided by the number of selections
+var score = 0; 
+var avg_score = 0; 
+
+// Slot machine and circle properties 
+//Minimum circle radius 
+var radius = 5; 
+
+//the slot machines
+var slot_machines;
+
+//The svg circles themselves to represent slot_machines
+var circles; 
+// "Ghost" circles that show the true mean 
+var ghost_circles; 
+
+//flag to determine if we've hit the reset button or not 
+var resetFlag = false; 
+
+
+
+//Setup the svg canvas and the borders 
+// initialise the variables svg, border, width, height
+setup_svg();
+
+// From this point all action is by buttons and sliders. 
+
+</script>
