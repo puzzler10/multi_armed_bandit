@@ -1,3 +1,5 @@
+[Click here](https://bl.ocks.org/puzzler10/f8955e779fd81f5cf7befaef76bdf503) to view this in action!
+
 ### The problem ###
 
 This is a simulation of the [multi-armed bandit](https://en.wikipedia.org/wiki/Multi-armed_bandit) problem. Given a number of options to choose between, this multi-armed bandit problem describes how to choose the best option when you don't know much about any of them. 
